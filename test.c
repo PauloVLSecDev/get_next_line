@@ -3,22 +3,26 @@
 
 int	main(void)
 {
-	//pelo que eu entendi a linha 6 dever ser feita na main
+	//pelo que eu entendi a linha abaixo dever ser feita na main
 	int fd = open("read_me.txt", O_RDONLY);
-	char *line;
+	int	line_size;
+	static	char *line;
 	if (fd == -1)
 		printf("Erro nenhum arquivo encontrado");
-	while(ft_strchr(line, '\n') && )
+	line_size = 1;
+	line = (char *)malloc(BUFFER_SIZE * sizeof(char *));
+		if(!line)
+			return (0);
+	while(!ft_strchr(line, '\n') != 0)
 	{
-		ssize_t buffer = read(fd, line, BUFFER_SIZE);
-
+		line_size = read(fd, line, BUFFER_SIZE);
 	}
-	if (buffer > 0 && readsize[buffer] == "\n")
+	if (line_size > 0)
 	{
-		line[buffer] = '\0';
-		printf("foram lidos %s caracteres de %zu\n", line, buffer);
+		line[line_size] = '\0';
+		printf("foram lidos %s caracteres de %i\n", line, line_size);
 	}
-	else if (buffer == 0)
+	else if (line_size == 0)
 		printf("arquivo lido\n");
 	else
 		printf("erro ao ler aquivo");
