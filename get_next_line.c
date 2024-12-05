@@ -6,22 +6,31 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:38:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/05 18:37:51 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:45:16 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-char	*read_file(int fd, char *buffer)
+char	*ft_freeall(int fd, char *buffer)
+{
+	char	*temp;
+
+	temp = strjoin(line, buffer)
+	free(buffer);
+	
+}
+char	*read_file(int fd, char *remaining)
 {
 	char	*line;
 	int	size_read;
-
+	if(!remaining)
+		remaining = (char *)malloc(BUFFER_SIZE);
 	size_read = 1;
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char *));
-	line = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char *));
-	if(!buffer)
+	line = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if(!line)
+		free(line);
 		return (NULL);
 	while(read_file > 0)
 	{
@@ -34,13 +43,14 @@ char	*read_file(int fd, char *buffer)
 		if(ft_strchr(line, '\n'))
 			break;
 	}
+	buffer = ft_free(line, remaining);
 	line[size_read] = '\0';
 	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[BUFFER_SIZE];
 	char	*line;
 
 	if(fd < 0 || BUFFER_SIZE <= 0)
@@ -49,12 +59,23 @@ char	*get_next_line(int fd)
 	if(!buffer)
 		return (NULL);
 	return(buffer);
-}
-
-int	main(void)
+} 
+int	main(int argc, char **argv)
 {
-	int fd = open("read_me.txt", O_RDONLY);
-	char *line = get_next_line(fd);
-	printf("%s", line);
-	
+	int fd;
+	char *line;
+	int i = 1;
+
+	while (i < argc)
+    {
+		fd = open(argv[i], O_RDONLY);
+		while ((line = get_next_line(fd)) != NULL)
+		{
+			printf("%s", line);
+			free(line);
+		}
+		close(fd);
+		i++;
+    }
+	return 0;
 }
