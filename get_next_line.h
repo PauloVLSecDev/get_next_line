@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:38:58 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/05 18:48:19 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:07:49 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <unistd.h>
 
 char	*ft_strchr(const char *s, int n);
+char	*ft_strjoin(const char *s1, const char *s2);
 //put prototip over here
 //
 #endif

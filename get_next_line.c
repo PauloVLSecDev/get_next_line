@@ -6,20 +6,21 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:38:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/05 19:45:16 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:14:36 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-char	*ft_freeall(int fd, char *buffer)
+char	*ft_freeall(char *line, char *buffer)
 {
 	char	*temp;
 
-	temp = strjoin(line, buffer)
+	temp = ft_strjoin(line, buffer);
 	free(buffer);
-	
+	return (temp);
+
 }
 char	*read_file(int fd, char *remaining)
 {
@@ -30,9 +31,11 @@ char	*read_file(int fd, char *remaining)
 	size_read = 1;
 	line = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if(!line)
+	{
 		free(line);
-		return (NULL);
-	while(read_file > 0)
+		return(NULL);
+	}
+	while(size_read > 0)
 	{
 		size_read = read(fd, line, BUFFER_SIZE + 1);
 		if (size_read == -1)
@@ -43,15 +46,13 @@ char	*read_file(int fd, char *remaining)
 		if(ft_strchr(line, '\n'))
 			break;
 	}
-	buffer = ft_free(line, remaining);
+	remaining = ft_freeall(line, remaining);
 	line[size_read] = '\0';
 	return (line);
 }
-
 char	*get_next_line(int fd)
 {
-	static char	*buffer[BUFFER_SIZE];
-	char	*line;
+	static char	*buffer;
 
 	if(fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -59,23 +60,24 @@ char	*get_next_line(int fd)
 	if(!buffer)
 		return (NULL);
 	return(buffer);
-} 
+}
+/*
 int	main(int argc, char **argv)
 {
-	int fd;
-	char *line;
-	int i = 1;
+	int	fd;
+	char	*line;
+	int	i = 1;
 
 	while (i < argc)
-    {
+	{
 		fd = open(argv[i], O_RDONLY);
 		while ((line = get_next_line(fd)) != NULL)
 		{
 			printf("%s", line);
-			free(line);
 		}
 		close(fd);
 		i++;
-    }
+	}
 	return 0;
 }
+*/
