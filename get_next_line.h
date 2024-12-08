@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:38:58 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/06 16:07:49 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/08 15:05:14 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 
 #ifndef  BUFFER_SIZE
 #define  BUFFER_SIZE 42
-
+#endif
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
 
 char	*ft_strchr(const char *s, int n);
 char	*ft_strjoin(const char *s1, const char *s2);
+char	*ft_substr(const char *s, unsigned int start, size_t len);
 //put prototip over here
-//
-#endif
 #endif
