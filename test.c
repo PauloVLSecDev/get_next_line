@@ -13,7 +13,7 @@ int	main(void)
 	line = (char *)malloc(BUFFER_SIZE * sizeof(char *));
 		if(!line)
 			return (0);
-	while(!ft_strchr(line, '\n') != 0)
+	while(!ft_strchr(line, '\n'))
 	{
 		line_size = read(fd, line, BUFFER_SIZE);
 	}
