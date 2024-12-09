@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:43:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/08 15:08:38 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:49:20 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,23 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
+char	*ft_strdup(const char *s)
+{
+	char		*dest;
+	int		len;
+	int		i;
+
+	i = 0;
+	len = ft_strlen(s) + 1;
+	dest = (char *)malloc(len);
+	if (dest == NULL)
+		return (NULL);
+	while (*s != '\0')
+		dest[i++] = *s++;
+	dest[i] = '\0';
+	return (dest);
+}
+
 char    *ft_substr(const char *s, unsigned int start, size_t len)
 {
 	char    *dest;
@@ -32,10 +49,7 @@ char    *ft_substr(const char *s, unsigned int start, size_t len)
 	i = 0;
 	size_s = ft_strlen(s);
 	if (start > size_s)
-	{
-		free((char *)s);
-		return (NULL);
-	}
+		return (ft_strdup(""));
 	if (len > size_s - start)
 		len = size_s - start;
 	dest = (char *)malloc(len + 1);

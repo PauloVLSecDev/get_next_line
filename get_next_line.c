@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:38:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/09 16:40:23 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:59:17 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,25 @@
 
 char	*extract_line(char **buffer)
 {
+	char	*line;
+	char	*temp;
 	char	*new_line;
 
 	new_line = ft_strchr(*buffer, '\n');
-	
-	return (line)
+	if(new_line)
+	{
+		line = ft_substr(*buffer, 0, new_line - *buffer + 1);
+		temp = ft_strdup(new_line + 1);
+		free(*buffer);
+		*buffer = temp;
+	}
+	else 
+	{
+		line = ft_strdup(*buffer);	
+		free(*buffer);
+		*buffer = NULL;
+	}
+	return (line);
 }
 
 char	*read_file(int fd, char **buffer)
@@ -29,22 +43,23 @@ char	*read_file(int fd, char **buffer)
        	char	*temp; 
 
 	size_read = 1;
-	while(size_read > 0)
+	while (size_read > 0)
 	{
 		size_read = read(fd, line, BUFFER_SIZE);
-		if(size_read == -1)
-		{
-			free(line);
-			return (NULL);
-		}
 		line[BUFFER_SIZE] = '\0';
 		temp = ft_strjoin(*buffer, line);
-		free(buffer);
+		free(*buffer);
 		*buffer = temp;
 		if(ft_strchr(line, '\n'))
 			break;
 	}
-	return (buffer);
+	if (size_read == -1)
+	{
+		free(*buffer);
+		*buffer = NULL;
+	}
+		
+	return (*buffer);
 }
 
 char	*get_next_line(int fd)
