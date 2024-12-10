@@ -6,14 +6,14 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:38:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/09 19:59:17 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:29:53 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-char	*extract_line(char **buffer)
+static char	*extract_line(char **buffer)
 {
 	char	*line;
 	char	*temp;
@@ -36,16 +36,21 @@ char	*extract_line(char **buffer)
 	return (line);
 }
 
-char	*read_file(int fd, char **buffer)
+static char	*read_file(int fd, char **buffer)
 {
 	char	line[BUFFER_SIZE + 1];
        	int	size_read;
-       	char	*temp; 
+       	char	*temp;
 
 	size_read = 1;
 	while (size_read > 0)
 	{
 		size_read = read(fd, line, BUFFER_SIZE);
+		if (size_read == -1)
+		{
+			free(*buffer);
+			*buffer = NULL;
+		}
 		line[BUFFER_SIZE] = '\0';
 		temp = ft_strjoin(*buffer, line);
 		free(*buffer);
@@ -53,12 +58,6 @@ char	*read_file(int fd, char **buffer)
 		if(ft_strchr(line, '\n'))
 			break;
 	}
-	if (size_read == -1)
-	{
-		free(*buffer);
-		*buffer = NULL;
-	}
-		
 	return (*buffer);
 }
 
@@ -74,17 +73,23 @@ char	*get_next_line(int fd)
 	return (extract_line(&buffer));
 }
 
+/*
 int	main(int argc, char *argv[])
 {
 	char	*line; 
 	int	fd;
 
-	if (argc < 2)
-		return (printf("without fd"));
+//	if (argc < 2)
+//		return (printf("without fd"));
 	fd = open(argv[1], O_RDONLY);
-	while ((line = get_next_line(fd))!= NULL) 
-	{
-		printf("%s", line);
-		free(line);
-	}
+//	while ((line = get_next_line(fd))!= NULL) 
+//	{
+	line = get_next_line(fd);
+	printf("%s", line);
+	line = get_next_line(fd);
+	printf("%s", line);
+	line = get_next_line(fd);
+//	}
+	return (0);
 }
+*/
