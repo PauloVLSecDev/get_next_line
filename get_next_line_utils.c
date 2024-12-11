@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:43:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/10 16:59:56 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/11 16:17:14 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,24 @@ size_t	ft_strlen(const char *s)
 	size_t	len;
 
 	len = 0;
-	if (s == NULL)
+	if (!s)
 		return (len);
-	while(s[len] != '\0')
+	while (s[len] != '\0')
 		len++;
 	return (len);
 } 
+
 char	*ft_strdup(const char *s) {
 	char		*dest;
 	int		len;
 	int		i;
 
+	if (!s)
+		return (NULL);
 	i = 0;
 	len = ft_strlen(s) + 1;
 	dest = (char *)malloc(len);
-	if (dest == NULL)
+	if (!dest)
 		return (NULL);
 	while (*s != '\0')
 		dest[i++] = *s++;
@@ -87,8 +90,6 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	s3 = (char *)malloc(size + 1);
 	if (!s3)
 		return (NULL);
-	if (s1 == NULL)
-		s1 = ft_strdup("");
 	while(*s1 != '\0')
 		s3[i++] = *s1++;
 	while(*s2 != '\0')

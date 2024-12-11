@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:38:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/10 20:29:53 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/11 19:03:07 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static char	*extract_line(char **buffer)
 	char	*line;
 	char	*temp;
 	char	*new_line;
-
+	
+	if (!*buffer || **buffer == '\0')
+		return (NULL);
 	new_line = ft_strchr(*buffer, '\n');
 	if(new_line)
 	{
@@ -39,23 +41,26 @@ static char	*extract_line(char **buffer)
 static char	*read_file(int fd, char **buffer)
 {
 	char	line[BUFFER_SIZE + 1];
-       	int	size_read;
-       	char	*temp;
+	int	size_read;
+	char	*temp;
 
-	size_read = 1;
-	while (size_read > 0)
+	
+	while (1 <= BUFFER_SIZE)
 	{
 		size_read = read(fd, line, BUFFER_SIZE);
 		if (size_read == -1)
 		{
 			free(*buffer);
 			*buffer = NULL;
+			return (NULL);
 		}
-		line[BUFFER_SIZE] = '\0';
+		if (size_read == 0)
+			break;
+		line[size_read] = '\0';
 		temp = ft_strjoin(*buffer, line);
 		free(*buffer);
 		*buffer = temp;
-		if(ft_strchr(line, '\n'))
+		if (ft_strchr(line, '\n'))
 			break;
 	}
 	return (*buffer);
@@ -63,33 +68,44 @@ static char	*read_file(int fd, char **buffer)
 
 char	*get_next_line(int fd)
 {
+	char		*new_line;
 	static char	*buffer;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	if (!buffer)
+		buffer = ft_strdup("");
 	read_file(fd, &buffer);
-	if(!buffer)
-		return (NULL);
-	return (extract_line(&buffer));
+	new_line = extract_line(&buffer);
+	if (buffer && buffer[0] == '\0')
+	{
+		free(buffer);
+		buffer = NULL;
+	}
+	return (new_line);
 }
 
-/*
-int	main(int argc, char *argv[])
-{
-	char	*line; 
-	int	fd;
+// int	main(int argc, char *argv[])
+// {
+// 	char	*line; 
+// 	int	fd;
 
-//	if (argc < 2)
-//		return (printf("without fd"));
-	fd = open(argv[1], O_RDONLY);
-//	while ((line = get_next_line(fd))!= NULL) 
-//	{
-	line = get_next_line(fd);
-	printf("%s", line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	line = get_next_line(fd);
-//	}
-	return (0);
-}
-*/
+// 	if (argc < 2)
+// 		return (printf("without fd"));
+// 	// fd = open(argv[1], O_RDONLY);
+// 	fd = 5;
+// 	while ((line = get_next_line(fd)) != NULL)
+// 	{
+// 		printf("%s", line);
+// 		free(line);
+// 	}
+// 	line = get_next_line(fd);
+// 	line = get_next_line(fd);
+// 	line = get_next_line(fd);
+// 	line = get_next_line(fd);
+// 	line = get_next_line(fd);
+// 	line = get_next_line(fd);
+// 	line = get_next_line(fd);
+// 	close(fd);
+// 	return (0);
+// }
