@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:38:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/11 19:03:07 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:01:35 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,18 @@ static char	*extract_line(char **buffer)
 
 static char	*read_file(int fd, char **buffer)
 {
-	char	line[BUFFER_SIZE + 1];
+	char	*line;
 	int	size_read;
 	char	*temp;
 
-	
-	while (1 <= BUFFER_SIZE)
+	line = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!line)
+		return (NULL);
+	while (1)
 	{
 		size_read = read(fd, line, BUFFER_SIZE);
 		if (size_read == -1)
-		{
-			free(*buffer);
-			*buffer = NULL;
-			return (NULL);
-		}
+			return (free(*buffer), free(line), *buffer = NULL, NULL);
 		if (size_read == 0)
 			break;
 		line[size_read] = '\0';
@@ -63,6 +61,7 @@ static char	*read_file(int fd, char **buffer)
 		if (ft_strchr(line, '\n'))
 			break;
 	}
+	free(line);
 	return (*buffer);
 }
 
@@ -85,27 +84,22 @@ char	*get_next_line(int fd)
 	return (new_line);
 }
 
-// int	main(int argc, char *argv[])
-// {
-// 	char	*line; 
-// 	int	fd;
 
-// 	if (argc < 2)
-// 		return (printf("without fd"));
-// 	// fd = open(argv[1], O_RDONLY);
-// 	fd = 5;
-// 	while ((line = get_next_line(fd)) != NULL)
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 	}
-// 	line = get_next_line(fd);
-// 	line = get_next_line(fd);
-// 	line = get_next_line(fd);
-// 	line = get_next_line(fd);
-// 	line = get_next_line(fd);
-// 	line = get_next_line(fd);
-// 	line = get_next_line(fd);
-// 	close(fd);
-// 	return (0);
-// }
+// int	main(int argc, char *argv[])
+//  {
+//  	char	*line; 
+//  	int	fd;
+
+//  	if (argc < 2)
+//  		return (printf("without fd"));
+// 	fd = open(argv[1], O_RDONLY);
+//  	while ((line = get_next_line(fd)) != NULL)
+//  	{
+//  		printf("%s", line);
+//  		free(line);
+//  	}
+//  	line = get_next_line(fd);
+//  	close(fd);
+//  	return (0);
+//  }
+

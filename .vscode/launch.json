@@ -1,0 +1,57 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug tudo com .c",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/a.out",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "Debug tudo com .c",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug tudo com .c com falha na memória",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/main",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "Debug tudo com .c com falha na memória",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug com fsoares",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/main",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "Debug com fsoares",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug com Daniel",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/main",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "Debug com Daniel",
+            "miDebuggerPath": "/usr/bin/gdb"
+        }
+    ]
+}

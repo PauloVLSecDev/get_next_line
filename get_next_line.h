@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:38:58 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/11 13:55:05 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:03:15 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define GET_NEXT_LINE_H
 
 #ifndef  BUFFER_SIZE
-#define  BUFFER_SIZE 1
+#define  BUFFER_SIZE 10000000
 #endif
 #include <stdlib.h>
 #include <fcntl.h>
