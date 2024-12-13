@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:38:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/13 17:28:06 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:23:33 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*get_next_line(int fd)
 	}
 	return (new_line);
 }
-
+/*
 #include <fcntl.h>
 int	main(int argc, char *argv[])
 {
@@ -101,4 +101,5 @@ int	main(int argc, char *argv[])
   	}
   	close(fd);
   	return (0);
-  }
+}
+*/
