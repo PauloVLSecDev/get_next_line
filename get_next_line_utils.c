@@ -6,12 +6,11 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:43:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/13 15:19:24 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:07:18 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 size_t	ft_strlen(const char *s)
 {

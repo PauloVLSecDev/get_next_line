@@ -6,12 +6,11 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:38:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/13 18:23:33 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:06:36 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static char	*extract_line(char **buffer)
 {
