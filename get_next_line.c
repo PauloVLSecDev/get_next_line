@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:38:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/12 19:01:35 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:58:32 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@ static char	*extract_line(char **buffer)
 	char	*line;
 	char	*temp;
 	char	*new_line;
-	
+
 	if (!*buffer || **buffer == '\0')
 		return (NULL);
 	new_line = ft_strchr(*buffer, '\n');
-	if(new_line)
+	if (new_line)
 	{
 		line = ft_substr(*buffer, 0, new_line - *buffer + 1);
 		temp = ft_strdup(new_line + 1);
 		free(*buffer);
 		*buffer = temp;
 	}
-	else 
+	else
 	{
-		line = ft_strdup(*buffer);	
+		line = ft_strdup(*buffer);
 		free(*buffer);
 		*buffer = NULL;
 	}
@@ -40,9 +40,9 @@ static char	*extract_line(char **buffer)
 
 static char	*read_file(int fd, char **buffer)
 {
-	char	*line;
-	int	size_read;
-	char	*temp;
+	char		*line;
+	int			size_read;
+	char		*temp;
 
 	line = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!line)
@@ -51,15 +51,16 @@ static char	*read_file(int fd, char **buffer)
 	{
 		size_read = read(fd, line, BUFFER_SIZE);
 		if (size_read == -1)
-			return (free(*buffer), free(line), *buffer = NULL, NULL);
+			return (free(*buffer), free(line),
+				*buffer = NULL, NULL);
 		if (size_read == 0)
-			break;
+			break ;
 		line[size_read] = '\0';
 		temp = ft_strjoin(*buffer, line);
 		free(*buffer);
 		*buffer = temp;
 		if (ft_strchr(line, '\n'))
-			break;
+			break ;
 	}
 	free(line);
 	return (*buffer);
@@ -83,8 +84,6 @@ char	*get_next_line(int fd)
 	}
 	return (new_line);
 }
-
-
 // int	main(int argc, char *argv[])
 //  {
 //  	char	*line; 
@@ -102,4 +101,3 @@ char	*get_next_line(int fd)
 //  	close(fd);
 //  	return (0);
 //  }
-

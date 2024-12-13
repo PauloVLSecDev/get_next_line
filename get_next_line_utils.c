@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:43:35 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/11 16:17:14 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:19:24 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ size_t	ft_strlen(const char *s)
 	while (s[len] != '\0')
 		len++;
 	return (len);
-} 
+}
 
-char	*ft_strdup(const char *s) {
-	char		*dest;
+char	*ft_strdup(const char *s)
+{
+	char	*dest;
 	int		len;
 	int		i;
 
@@ -43,11 +44,11 @@ char	*ft_strdup(const char *s) {
 	return (dest);
 }
 
-char    *ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	char    *dest;
-	size_t  size_s;
-	size_t  i;
+	char	*dest;
+	size_t	size_s;
+	size_t	i;
 
 	i = 0;
 	size_s = ft_strlen(s);
@@ -76,12 +77,12 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)s);
 	return (NULL);
 }
- 
+
 char	*ft_strjoin(const char *s1, const char *s2)
 {
-	char    *s3;
-	size_t  size;
-	int	i;
+	char	*s3;
+	size_t	size;
+	int		i;
 
 	i = 0;
 	if (!s1 && !s2)
@@ -90,9 +91,9 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	s3 = (char *)malloc(size + 1);
 	if (!s3)
 		return (NULL);
-	while(*s1 != '\0')
+	while (*s1 != '\0')
 		s3[i++] = *s1++;
-	while(*s2 != '\0')
+	while (*s2 != '\0')
 		s3[i++] = *s2++;
 	s3[i] = '\0';
 	return (s3);
