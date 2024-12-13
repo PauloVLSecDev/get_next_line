@@ -6,7 +6,7 @@
 /*   By: pvitor-l <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:38:05 by pvitor-l          #+#    #+#             */
-/*   Updated: 2024/12/13 14:58:32 by pvitor-l         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:28:06 by pvitor-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,21 @@ char	*get_next_line(int fd)
 	}
 	return (new_line);
 }
-// int	main(int argc, char *argv[])
-//  {
-//  	char	*line; 
-//  	int	fd;
 
-//  	if (argc < 2)
-//  		return (printf("without fd"));
-// 	fd = open(argv[1], O_RDONLY);
-//  	while ((line = get_next_line(fd)) != NULL)
-//  	{
-//  		printf("%s", line);
-//  		free(line);
-//  	}
-//  	line = get_next_line(fd);
-//  	close(fd);
-//  	return (0);
-//  }
+#include <fcntl.h>
+int	main(int argc, char *argv[])
+{
+  	char	*line;
+  	int	fd;
+
+  	if (argc < 2)
+  		return (printf("without fd"));
+ 	fd = open(argv[1], O_RDONLY);
+  	while ((line = get_next_line(fd)) != NULL)
+  	{
+  		printf("%s", line);
+  		free(line);
+  	}
+  	close(fd);
+  	return (0);
+  }
